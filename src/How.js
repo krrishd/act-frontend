@@ -4,7 +4,7 @@ import {
   Link
 } from 'react-router';
 
-import http from './http';
+import qwest from 'qwest';
 
 class How extends Component {
   constructor(props) {
@@ -53,23 +53,25 @@ class How extends Component {
     
     const payload = {
       description: sessionStorage.getItem('act-desc'),
-      actions: JSON.stringify(this.store.getAll())
+      actions: this.store.getAll()
     }
     
-    const handler = res => {
+    const handler = (xhr, res) => {
       res = JSON.parse(res);
       sessionStorage.removeItem('act-desc');
       this.store.reset();
       browserHistory.push(`/how/${res.shortId}`);
     }
 
-    console.log(JSON.parse(payload.actions));
-
-    http.POST(
-      `${this.props.route.api}/api/new-cause`,
-      payload,
-      handler
-    );
+    qwest
+      .post(
+        `${this.props.route.api}/api/new-cause`,
+        payload,
+        {
+          cache: true
+        }
+      )
+      .then(handler);
   }
 
   addItem = (e) => {
@@ -78,7 +80,7 @@ class How extends Component {
     const link = (() => {
       const raw = (document.querySelector('.link').value).trim();
       if (raw.trim().length < 1) {
-        return false;
+        return null;
       } else if (
         !raw.trim().includes('http://') &&
         !raw.trim().includes('https://')) {

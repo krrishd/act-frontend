@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import http from './http';
+import qwest from 'qwest';
 
 class AgendaItem extends Component {
   render() {
@@ -65,11 +65,16 @@ class Agenda extends Component {
   }
 
   componentDidMount() {
-    http.GET(
-      `${this.props.route.api}/api/cause/${this.props.params.id}`,
-      (res) => {
+    qwest
+      .get(
+        `${this.props.route.api}/api/cause/${this.props.params.id}`, 
+        null,
+        {cache: true}
+      ).then((xhr, res) => {
         if (typeof res == 'string') {
           res = JSON.parse(res)[0];
+        } else {
+          res = res[0];
         }
         this.setState({
           description: res.description,
