@@ -298,7 +298,7 @@ input[type="url"]:focus {
 }
 
 .agenda .actionItem {
-
+  text-align: right;
 }
 
 .agenda .actionItem .itemDescription {
