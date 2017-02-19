@@ -1,3 +1,5 @@
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}
+
 @keyframes fadein {
     from { opacity: 0; }
     to   { opacity: 1; }
@@ -277,9 +279,14 @@ input[type="url"]:focus {
 }
 
 .agenda .description {
-  font-size: 1.5em;
+  font-size: 1em;
   width: 60%;
   margin: 0 auto;
+}
+
+.agenda .items {
+  position:relative;
+  left:-10%;
 }
 
 .agenda .actionItem {
@@ -288,9 +295,11 @@ input[type="url"]:focus {
 
 .agenda .actionItem .itemDescription {
   width: 60%;
-  font-size: 1.2em;
+  font-size: 1em;
   position: relative;
   z-index: 1;
+  vertical-align: middle;
+  text-align: right;
 }
 
 .agenda .actionItem .button:hover {
