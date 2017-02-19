@@ -57,7 +57,6 @@ class How extends Component {
     }
     
     const handler = (xhr, res) => {
-      res = JSON.parse(res);
       sessionStorage.removeItem('act-desc');
       this.store.reset();
       browserHistory.push(`/how/${res.shortId}`);
